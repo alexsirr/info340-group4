@@ -38,10 +38,6 @@ func main() {
 	router.LoadHTMLGlob("html/*")
 	router.Static("/static", "static")
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", nil)
-	})
-
 	router.GET("/QuserInfo", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here

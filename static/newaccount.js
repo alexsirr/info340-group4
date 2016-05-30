@@ -10,7 +10,7 @@ $(document).ready(function(){
         .done(function(data){
           if(data.result == "failed"){
             console.log(data)
-            $("#result"+index).text("Failed to create account! " + data.message);
+            $("#result").text("Failed to create account! " + data.message);
           } else {
             console.log(data)
             $("#result").text("Created New Account!");

@@ -62,7 +62,7 @@ func main() {
 		var first string
 		var last string
 		var email string
-		var phone string 
+		var phone string
 
 		for rows.Next() {
 			// assign each of them, in order, to the parameters of rows.Scan.
@@ -87,12 +87,12 @@ func main() {
 		if len(cols) == 0 {
 			c.AbortWithStatus(http.StatusNoContent)
 		}
-		
+
 		var para string
 		var address string
 		var state_name string
 		var city_name string
-		var zip_code int 
+		var zip_code int
 
 		for rows.Next() {
 			// assign each of them, in order, to the parameters of rows.Scan.
@@ -120,7 +120,7 @@ func main() {
 		var first string
 		var last string
 		var email string
-		var phone string 
+		var phone string
 
 		for rows.Next() {
 			// assign each of them, in order, to the parameters of rows.Scan.
@@ -175,6 +175,7 @@ func main() {
 		phone := c.PostForm("phone")
 		password := c.PostForm("password")
 		db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
+		c.Data(http.StatusOK, "text/html", []byte("<p>Inserted</p>"))
 	})
 
 	// NO code should go after this line. it won't ever reach that point

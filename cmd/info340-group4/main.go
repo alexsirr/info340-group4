@@ -52,7 +52,6 @@ func main() {
 	})
 
 	router.GET("/QuserInfo", func(c *gin.Context) {
-		// put your query here
 		rows, err := db.Query("SELECT first_name, last_name, email, phone_number FROM Customer WHERE customer_id = 1;")
 		if err != nil {
 			// careful about returning errors to the user!
@@ -78,24 +77,13 @@ func main() {
 	})
 
 	router.GET("/QuserAddr", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
-		// put your query here
 		rows, err := db.Query("SELECT address, city_name, state_name, zip_code FROM customer_address JOIN city ON city.city_id = customer_address.city_id JOIN state ON state.state_id = customer_address.state_id JOIN zip ON zip.zip_code_id = customer_address.zip_code_id WHERE customer_id = 1;")
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
 		}
-		// foreach loop over rows.Columns, using value
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-		for _, value := range cols {
-			table += "<th class='text-center'>" + value + "</th>"
-		}
-		// once you've added all the columns in, close the header
-		table += "</thead><tbody>"
-		// declare all your RETURNED columns here
+		
+		var para string
 		var address string
 		var state_name string
 		var city_name string
@@ -106,11 +94,9 @@ func main() {
 			// preface each variable with &
 			rows.Scan(&address, &city_name, &state_name, &zip_code)
 			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			table += "<tr><td>" + address + " " + city_name + ", " + state_name + " " + strconv.Itoa(zip_code) + "</td>></tr>"
+			para += "<p>Address: " + address + " " + city_name + ", " + state_name + strconv.Itoa(zip_code) + "</p>"
 		}
-		// finally, close out the body and table
-		table += "</tbody></table>"
-		c.Data(http.StatusOK, "text/html", []byte(table))
+		c.Data(http.StatusOK, "text/html", []byte(para))
 	})
 
 	router.POST("/Qnewaccount", func(c *gin.Context) {

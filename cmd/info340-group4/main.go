@@ -174,7 +174,7 @@ func main() {
 		email := c.PostForm("email")
 		phone := c.PostForm("phone")
 		password := c.PostForm("password")
-		db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
+		db.Query("SELECT insert_customer_data($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
 		c.Data(http.StatusOK, "text/html", []byte("<p>Inserted</p>"))
 	})
 

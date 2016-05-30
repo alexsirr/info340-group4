@@ -8,6 +8,8 @@ $(document).ready(function(){
     function newaccount(){
 		var vals = {fname: $("#fname").val(), lname: $("#lname").val(), email: $("#email").val(), phone: $("#phone").val(), password: $("#password").val()};
 		console.log(vals);
-        $.post("/Qnewaccount", vals);
+        $.post("/Qnewaccount", vals).done(function(data) {
+			$("#result").append(data);
+		}, "html");
     }
 })

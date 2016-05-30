@@ -1,10 +1,13 @@
 $(document).ready(function(){
 
-    $("#newaccount").click(function() {
+    $("#create-account").click(function() {
+		console.log("clicked");
 		newaccount();
 	})
 
     function newaccount(){
-        $.post("/Qnewaccount", {fname: $("#fname").val(), lname: $("#lname").val(), email: $("#email").val(), phone: $("#phone").val(), password: $("#password").val()})
+		var vals = {fname: $("#fname").val(), lname: $("#lname").val(), email: $("#email").val(), phone: $("#phone").val(), password: $("#password").val()};
+		console.log(vals);
+        $.post("/Qnewaccount", vals);
     }
 })

@@ -92,7 +92,7 @@ func main() {
 		email := c.PostForm("email")
 		phone := c.PostForm("phone")
 		password := c.PostForm("password")
-		rows, err := db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
+		db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
 	})
 
 	// NO code should go after this line. it won't ever reach that point

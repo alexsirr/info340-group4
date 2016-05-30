@@ -86,6 +86,15 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
+	router.POST("/Qnewaccount", func(c *gin.Context) {
+		fname := c.PostForm("fname")
+		lname := c.PostForm("lname")
+		email := c.PostForm("email")
+		phone := c.PostForm("phone")
+		password := c.PostForm("password")
+		rows, err := db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
+	})
+
 	// NO code should go after this line. it won't ever reach that point
 	router.Run(":" + port)
 }

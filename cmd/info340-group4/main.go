@@ -52,24 +52,14 @@ func main() {
 	})
 
 	router.GET("/QuserInfo", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT first_name, last_name, email, phone_number FROM Customer WHERE customer_id = 1;")
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
 		}
-		// foreach loop over rows.Columns, using value
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-		for _, value := range cols {
-			table += "<th class='text-center'>" + value + "</th>"
-		}
-		// once you've added all the columns in, close the header
-		table += "</thead><tbody>"
-		// declare all your RETURNED columns here
+
+		var para string
 		var first string
 		var last string
 		var email string
@@ -80,11 +70,11 @@ func main() {
 			// preface each variable with &
 			rows.Scan(&first, &last, &email, &phone)
 			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			table += "<tr><td>" + first + last + "</td><td>" + email + "</td><td>" + phone + "</td></tr>"
+			para += "<p>Name: " + first + " " + last + "</p>"
+			para += "<p>Email: " + email + "</p>"
+			para += "<p>Phone Number: " + phone + "</p>"
 		}
-		// finally, close out the body and table
-		table += "</tbody></table>"
-		c.Data(http.StatusOK, "text/html", []byte(table))
+		c.Data(http.StatusOK, "text/html", []byte(para))
 	})
 
 	router.GET("/QuserAddr", func(c *gin.Context) {

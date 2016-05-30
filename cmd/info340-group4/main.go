@@ -82,6 +82,11 @@ func main() {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
 		}
+
+		cols, _ := rows.Columns()
+		if len(cols) == 0 {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
 		
 		var para string
 		var address string
@@ -94,9 +99,73 @@ func main() {
 			// preface each variable with &
 			rows.Scan(&address, &city_name, &state_name, &zip_code)
 			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			para += "<p>Address: " + address + " " + city_name + ", " + state_name + strconv.Itoa(zip_code) + "</p>"
+			para += "<p>Address: " + address + " " + city_name + ", " + state_name + " " + strconv.Itoa(zip_code) + "</p>"
 		}
 		c.Data(http.StatusOK, "text/html", []byte(para))
+	})
+
+	router.GET("/QuserBooking", func(c *gin.Context) {
+		rows, err := db.Query("SELECT first_name, last_name, email, phone_number FROM Customer WHERE customer_id = 1;")
+		if err != nil {
+			// careful about returning errors to the user!
+			c.AbortWithError(http.StatusInternalServerError, err)
+		}
+
+		cols, _ := rows.Columns()
+		if len(cols) == 0 {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
+
+		var para string
+		var first string
+		var last string
+		var email string
+		var phone string 
+
+		for rows.Next() {
+			// assign each of them, in order, to the parameters of rows.Scan.
+			// preface each variable with &
+			rows.Scan(&first, &last, &email, &phone)
+			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
+			para += "<p>Name: " + first + " " + last + "</p>"
+			para += "<p>Email: " + email + "</p>"
+			para += "<p>Phone Number: " + phone + "</p>"
+		}
+		c.Data(http.StatusOK, "text/html", []byte(para))
+	})
+
+	router.GET("/QavailableRooms", func(c *gin.Context) {
+		table := "<table class='table'><thead><tr>"
+		// put your query here
+		rows, err := db.Query("Select hotel_name, room_number, room_type From Hotel Join room on hotel.hotel_id = room.hotel_id join room_type on room.room_type_id = room_type.room_type_id where room.booking_available = 'true';")
+		if err != nil {
+			// careful about returning errors to the user!
+			c.AbortWithError(http.StatusInternalServerError, err)
+		}
+		// foreach loop over rows.Columns, using value
+		cols, _ := rows.Columns()
+		if len(cols) == 0 {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
+		table += "<th class='text-center'>Hotel Name</th>"
+		table += "<th class='text-center'>Room Number</th>"
+		table += "<th class='text-center'>Room Type</th>"
+		// once you've added all the columns in, close the header
+		table += "</thead><tbody>"
+		// declare all your RETURNED columns here
+		var hotel string
+		var roomNum string
+		var roomType string
+		for rows.Next() {
+			// assign each of them, in order, to the parameters of rows.Scan.
+			// preface each variable with &
+			rows.Scan(&hotel, &roomNum, &roomType)
+			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
+			table += "<tr><td>" + hotel + "</td><td>" + roomNum + "</td><td>" + roomType + "</td></tr>"
+		}
+		// finally, close out the body and table
+		table += "</tbody></table>"
+		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
 	router.POST("/Qnewaccount", func(c *gin.Context) {

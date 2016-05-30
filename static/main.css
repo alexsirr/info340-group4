@@ -24,6 +24,12 @@ button, input{
 	position: absolute;
 }
 
+#available-rooms {
+	top: 75px;
+	left: 100px;
+	position: absolute;
+}
+
 #navbar {
 	opacity: .9;
 	width: 100%;

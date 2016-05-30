@@ -42,6 +42,14 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", nil)
 	})
 
+	router.GET("/account.html", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "account.html", nil)
+	})
+
+	router.GET("/newaccount.html", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "newaccount.html", nil)
+	})
+
 	router.GET("/QuserInfo", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here

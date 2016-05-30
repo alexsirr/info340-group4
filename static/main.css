@@ -8,6 +8,14 @@
 	font-weight: bold;
 }
 
+th {
+    text-align: center;
+}
+
+td {
+	text-align:center;
+}
+
 button, input{
   display: block;
 }

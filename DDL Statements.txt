@@ -1,0 +1,37 @@
+CREATE TABLE Password(password_id SERIAL PRIMARY KEY, password varchar(25));
+
+CREATE TABLE City(city_id SERIAL PRIMARY KEY, city_name varchar(200));
+
+CREATE TABLE State(state_id SERIAL PRIMARY KEY, state_name varchar(50));
+
+CREATE TABLE Zip(zip_code_id SERIAL PRIMARY KEY, zip_code int UNIQUE);
+
+CREATE TABLE Customer(customer_id SERIAL PRIMARY KEY, password_id int REFERENCES Password(password_id), first_name varchar(50), last_name varchar(50), email varchar(254) UNIQUE, phone_number varchar(12));
+
+CREATE TABLE Customer_Address(address_id SERIAL PRIMARY KEY, address varchar(200), city_id int REFERENCES City(city_id), state_id int REFERENCES State(state_id), zip_code_id int REFERENCES Zip(zip_code_id), customer_id int REFERENCES Customer(customer_id));
+
+CREATE TABLE Comment(comment_id SERIAL PRIMARY KEY, customer_id int REFERENCES Customer(customer_id), title varchar(300), description varchar(1000), individual_rating int CHECK(individual_rating >= 0), date date);
+
+CREATE TABLE Payment(payment_id SERIAL PRIMARY KEY, customer_id int REFERENCES Customer(customer_id), card_number bigint, name_on_card varchar(200), expiration_date varchar(5));
+
+CREATE  TABLE Room_type(room_type_id SERIAL PRIMARY KEY, room_type varchar(200), smoking boolean, bed_type varchar(50), bed_number int, capacity int);
+
+CREATE TABLE Amenities(amenities_id SERIAL PRIMARY KEY, pool boolean,  exercise_room boolean, cafe boolean, breakfast_service boolean);
+
+CREATE TABLE Hotel(hotel_id SERIAL PRIMARY KEY, amenities_id int REFERENCES Amenities(amenities_id), hotel_name varchar(100), overall_rating int CHECK(overall_rating >= 0), phone_number varchar(12), address varchar(200), city_id int REFERENCES City(city_id), state_id int REFERENCES State(state_id), zip_code_id int REFERENCES Zip(zip_code_id), email varchar(100));
+
+CREATE TABLE Room(room_number int, hotel_id int REFERENCES Hotel(hotel_id), room_type_id int REFERENCES Room_type(room_type_id), internet_access boolean, booking_available boolean, floor_level int, PRIMARY KEY(room_number, hotel_id));
+
+CREATE TABLE Booking(booking_id SERIAL PRIMARY KEY, customer_id int REFERENCES Customer(customer_id), room_number int, hotel_id int, party_size int, begin_date date, end_date date, FOREIGN KEY(room_number, hotel_id) REFERENCES Room(room_number, hotel_id));
+
+CREATE TABLE Invoice(invoice_id SERIAL PRIMARY KEY, booking_id int REFERENCES Booking(booking_id), discount money CHECK(discount::numeric >= 0), total_price money CHECK(total_price::numeric >= 0));
+
+CREATE TABLE Transaction(transaction_id SERIAL PRIMARY KEY, invoice_id int REFERENCES Invoice(invoice_id), payment_id int REFERENCES Payment(payment_id), transaction_amount money CHECK(transaction_amount::numeric >= 0), transaction_date date);
+
+
+
+
+
+
+
+

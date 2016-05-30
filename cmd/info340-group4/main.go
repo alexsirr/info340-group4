@@ -175,7 +175,7 @@ func main() {
 		phone := c.PostForm("phone")
 		password := c.PostForm("password")
 		db.Query("SELECT insert_customer_data($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
-		c.Data(http.StatusOK, "text/html", []byte("<p>Inserted</p>"))
+		c.Data(http.StatusOK, "text/html", []byte("New Account Created"))
 	})
 
 	// NO code should go after this line. it won't ever reach that point

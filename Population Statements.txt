@@ -4,6 +4,7 @@ CREATE INDEX hotelRating ON Hotel(overall_rating);
 CREATE INDEX roomFloor ON Room(floor_level);
 
 Stored Procedures
+
 CREATE FUNCTION create_customer(newpass varchar(25),first_name varchar(50), last_name varchar(50), email varchar(100), phone_number varchar(12)) RETURNS VOID AS $$
 DECLARE pass_id int;
 BEGIN
@@ -26,7 +27,7 @@ Password
 INSERT INTO Password(password) VALUES('blah!'), ('Password123!'),('I_love_Dogs!'),('p@ssword'),('super_silly'),('123456789'), ('just_do_it'), ('n0entry'), ('204060puma');
 
 City
-INSERT INTO City(city_name) VALUES('Seattle'), ('Portland'), ('Chicago'), ('New York'), ('San Francisco'), ('Houston'), ('Los Angeles'), ('Dallas'), ('Washington'), ('Las Vegas'), ('Sicklerville'), ('Harlingen'), ('Valrico'), ('Pleasantville'), ('Pittsburgh'), ('Miami'), ('Orlando'), ('Vancouver'), (‘Anchorage’);
+INSERT INTO City(city_name) VALUES('Seattle'), ('Portland'), ('Chicago'), ('New York'), ('San Francisco'), ('Houston'), ('Los Angeles'), ('Dallas'), ('Washington'), ('Las Vegas'), ('Sicklerville'), ('Harlingen'), ('Valrico'), ('Pleasantville'), ('Pittsburgh'), ('Miami'), ('Orlando'), ('Vancouver'), ('Anchorage');
 
 State (There are 52, includes territories)
 INSERT INTO State(state_name) VALUES('Alabama'),
@@ -82,11 +83,13 @@ INSERT INTO State(state_name) VALUES('Alabama'),
 ('Wisconsin'),
 ('Wyoming');
 
+
 Zip
 INSERT INTO Zip(zip_code) VALUES(98004),
-(98195), (98115), (98101), (08081), (78552), (33594), (08232), (98155), (98145);
+(98195), (98115), (98101), (08081), (78552), (33594), (08232), (98155), (98145), (99501);
 Customer
 INSERT INTO Customer(password_id, first_name, last_name, email, phone_number) VALUES(1, 'John', 'Doe', 'johndoe@email.com', '425-222-3333'), (2, 'Tom', 'Smith', 'tomsmith@gmail.com', '206-532-1234'), (3, 'Aaron', 'Brown', 'aaronbrown@gmail.com', '206-654-0432'), (4, 'Abby', 'Pratt', 'abbypratt@gmail.com', '206-543-6845'), (5, 'Jefferson', 'Nichols', 'jeffersonnicholes@gmail.com', '458-321-3945'), (6, 'Orange', 'Scott', 'orangescotte@gmail.com', '206-436-9843'), (7, 'Bob', 'Meyers', 'bmeyers@hotmail.com', '425-774-8322'), (8, 'Amy', 'Shay', 'shaymy@yahoo.com', '360-522-4009');
+
 
 Customer_Address
 INSERT INTO Customer_Address(address, city_id, state_id, zip_code_id, customer_id) VALUES ('1234 Se 45th St', 1,  49, 2, 1),
@@ -107,13 +110,13 @@ Amenities
 INSERT INTO Amenities(pool, exercise_room, cafe, breakfast_service) VALUES ('true', 'true', 'true', 'true'), ('true', 'true', 'false', 'false'), ('false', 'false', 'false', 'false'), ('false', 'false', 'true', 'true');
 
 Hotel
-INSERT INTO Hotel (amenities_id, hotel_name, overall_rating, phone_number, address, city_id, state_id, zip_code_id, email) VALUES(1, 'Hilton Seattle', 8, '206-123-1234', '1301 6th Ave', 1, 49, 4, 'hiltonseattle@hiltion.com'), (2, 'Motif Seattle', 7, '206-543-8345', '1415 5th Ave', 1, 49, 4, 'motifseattle@motif.com'), (3, 'Inlet Tower Hotel & Suites', 6, ‘907-276-0110’, '1020 W 12th Ave', 19, 1, 11, ‘inletAnchorage@inlet.com');
+INSERT INTO Hotel (amenities_id, hotel_name, overall_rating, phone_number, address, city_id, state_id, zip_code_id, email) VALUES(1, 'Hilton Seattle', 8, '206-123-1234', '1301 6th Ave', 1, 49, 4, 'hiltonseattle@hiltion.com'), (2, 'Motif Seattle', 7, '206-543-8345', '1415 5th Ave', 1, 49, 4, 'motifseattle@motif.com'), (3, 'Inlet Tower Hotel & Suites', 6, '907-276-0110', '1020 W 12th Ave', 19, 1, 11, 'inletAnchorage@inlet.com');
 
 Room_Type
 INSERT INTO Room_Type(room_type, smoking, bed_type, bed_number, capacity) VALUES('Double Twin Room', false, 'Twin', 2, 2), ('Deluxe Single Room', 'false', 'King', 1, 2), ('2 Queen Room', 'false', 'Queen', 2, 4), ('Classic Single Room', 'false', 'Queen', 1, 2), ('Executive Single City View Room', 'false', 'King', 1, 3), ('One Bedroom Suite', 'false', 'King', 1, 2) ;
 
 Room
-INSERT INTO Room(room_number, hotel_id, room_type_id, internet_access, booking_available, floor_level) VALUES(212, 1, 1, 'true', 'true', 2), (321, 1, 2, 'true', 'false', 3), (103, 1, 3, 'true', 'true',1), (306, 1, 4, 'true', 'false', 3), (634, 1, 5, 'true', 'true', 6), (434, 1, 6, 'false', 'false', 4), (902, 2, 1, 'false', 'true', 9), (107, 2, 2, 'true', 'true', 1), (344, 2, 4, 'true', 'true', 3), (110, 2, 5 'false', 'true', 1), (932, 3, 1, 'true', 'true', 9), (666, 3, 2, 'false', 'true', 6), (224, 3, 2, 'true', 'true', 2);
+INSERT INTO Room(room_number, hotel_id, room_type_id, internet_access, booking_available, floor_level) VALUES(212, 1, 1, 'true', 'true', 2), (321, 1, 2, 'true', 'false', 3), (103, 1, 3, 'true', 'true',1), (306, 1, 4, 'true', 'false', 3), (634, 1, 5, 'true', 'true', 6), (434, 1, 6, 'false', 'false', 4), (902, 2, 1, 'false', 'true', 9), (107, 2, 2, 'true', 'true', 1), (344, 2, 4, 'true', 'true', 3), (110, 2, 5, 'false', 'true', 1), (932, 3, 1, 'true', 'true', 9), (666, 3, 2, 'false', 'true', 6), (224, 3, 2, 'true', 'true', 2);
 
 Booking
 INSERT INTO Booking(customer_id, room_number, hotel_id, party_size, begin_date, end_date) VALUES (1, 212, 1, 1, '2016-02-01', '2016-02-03'), (2, 902, 2, 2, '2015-12-23', '2015-12-24'), (3, 434, 1, 2, '2016-05-21', '2016-05-23'); 
@@ -123,3 +126,4 @@ INSERT INTO invoice(booking_id, discount, total_price) VALUES (1, '$0.00', '$290
 
 Transaction
 INSERT INTO Transaction(invoice_id, payment_id, transaction_amount, transaction_date) VALUES (1, 1, '$290.21', '2016-01-20'), (1, 1, '$111.34', '2016-02-01'), (2, 2, '$145.54', '2015-12-23'), (3, 3, 150.54, '2016-05-21');
+

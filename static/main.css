@@ -59,12 +59,16 @@ h2 {
 	border: 5px solid gray;
 	border-radius: 10px;
 	width: 50%;
-	margin: auto;
-	text-align: center;
+	margin-right: auto;
+	margin-left:auto;
 }
 
 #UserImg {
 	height: 50px;
 	width: 50px;
-	background-image: url("http://www.fashatude.com/static/fashatude/img/user_icon.png");
 }
+
+#imputBox {
+	margin: 2em;
+}
+

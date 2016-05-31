@@ -39,8 +39,12 @@ button#create-account {
 
 #newaccount-inputs{
 	top: 75px;
-	left: 100px;
+	left: 25%;
 	position: absolute;
+	border: 5px solid gray;
+	border-radius: 10px;
+	width: 50%;
+
 }
 
 .container {
@@ -61,14 +65,6 @@ button#create-account {
 
 #navbar li{
 	display: inline;
-}
-
-#newaccount-inputs {
-	border: 5px solid gray;
-	border-radius: 10px;
-	width: 50%;
-	margin-right: auto;
-	margin-left:auto;
 }
 
 #newaccount-inputs p {

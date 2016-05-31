@@ -61,14 +61,16 @@ h2 {
 	width: 50%;
 	margin-right: auto;
 	margin-left:auto;
+	text-align: center;
 }
 
-#UserImg {
-	height: 50px;
-	width: 50px;
+#newaccount-inputs p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
 }
 
 #imputBox {
-	margin: 2em;
+	
 }
 

@@ -61,5 +61,7 @@ h2 {
 }
 
 #UserImg {
+	height: 50px;
+	width: 50px;
 	background-image: url("http://www.fashatude.com/static/fashatude/img/user_icon.png");
 }

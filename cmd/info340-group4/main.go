@@ -104,35 +104,6 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(para))
 	})
 
-	router.GET("/QuserBooking", func(c *gin.Context) {
-		rows, err := db.Query("SELECT first_name, last_name, email, phone_number FROM Customer WHERE customer_id = 1;")
-		if err != nil {
-			// careful about returning errors to the user!
-			c.AbortWithError(http.StatusInternalServerError, err)
-		}
-
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-
-		var para string
-		var first string
-		var last string
-		var email string
-		var phone string
-
-		for rows.Next() {
-			// assign each of them, in order, to the parameters of rows.Scan.
-			// preface each variable with &
-			rows.Scan(&first, &last, &email, &phone)
-			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			para += "<p>Name: " + first + " " + last + "</p>"
-			para += "<p>Email: " + email + "</p>"
-			para += "<p>Phone Number: " + phone + "</p>"
-		}
-		c.Data(http.StatusOK, "text/html", []byte(para))
-	})
 
 	router.GET("/QavailableRooms", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"

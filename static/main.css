@@ -44,3 +44,12 @@ button, input{
 #navbar li{
 	display: inline;
 }
+
+#newaccount-inputs {
+	border: 2px solid gray;
+	border-radius: 10px;
+}
+
+#UserImg {
+	background-image: url("http://www.fashatude.com/static/fashatude/img/user_icon.png");
+}

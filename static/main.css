@@ -24,6 +24,14 @@ h2 {
 	text-align: center;
 }
 
+input {
+	margin: auto;
+}
+
+button#create-account {
+	margin: auto;
+}
+
 #user-container {
 	margin-bottom: 100px;
 	text-align: center;

@@ -36,15 +36,8 @@ h2 {
 }
 
 .container {
-	top: 75px;
-	left: 100px;
-	position: absolute;
-}
-
-#available-rooms {
-	top: 75px;
-	left: 100px;
-	position: absolute;
+	margin: auto;
+	padding-top: 50px; 
 }
 
 #navbar {

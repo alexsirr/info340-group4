@@ -56,11 +56,13 @@ h2 {
 }
 
 #newaccount-inputs {
+	background-image: url("hotel.jpg");
 	border: 5px solid gray;
 	border-radius: 10px;
 	width: 50%;
 	margin-right: auto;
 	margin-left:auto;
+	color: white;
 }
 
 #newaccount-inputs p {

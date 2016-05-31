@@ -20,6 +20,14 @@ button, input{
   display: block;
 }
 
+h2 {
+	text-align: center;
+}
+
+#user-container {
+	margin-bottom: 100px;
+}
+
 #newaccount-inputs{
 	top: 75px;
 	left: 100px;

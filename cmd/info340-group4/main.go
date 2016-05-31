@@ -104,35 +104,6 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(para))
 	})
 
-	router.GET("/QuserBooking", func(c *gin.Context) {
-		rows, err := db.Query("SELECT first_name, last_name, email, phone_number FROM Customer WHERE customer_id = 1;")
-		if err != nil {
-			// careful about returning errors to the user!
-			c.AbortWithError(http.StatusInternalServerError, err)
-		}
-
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-
-		var para string
-		var first string
-		var last string
-		var email string
-		var phone string
-
-		for rows.Next() {
-			// assign each of them, in order, to the parameters of rows.Scan.
-			// preface each variable with &
-			rows.Scan(&first, &last, &email, &phone)
-			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			para += "<p>Name: " + first + " " + last + "</p>"
-			para += "<p>Email: " + email + "</p>"
-			para += "<p>Phone Number: " + phone + "</p>"
-		}
-		c.Data(http.StatusOK, "text/html", []byte(para))
-	})
 
 	router.GET("/QavailableRooms", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
@@ -168,13 +139,52 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
+
+	router.GET("/QuserBooking", func(c *gin.Context) {
+		table := "<table class='table'><thead><tr>"
+		// put your query here
+		rows, err := db.Query("SELECT hotel_name, room_number, party_size, begin_date, end_date From Booking JOIN Hotel ON hotel.hotel_id = booking.hotel_id WHERE customer_id = 1 AND (begin_date >= current_date OR end_date >= current_date);")
+		if err != nil {
+			// careful about returning errors to the user!
+			c.AbortWithError(http.StatusInternalServerError, err)
+		}
+		// foreach loop over rows.Columns, using value
+		cols, _ := rows.Columns()
+		if len(cols) == 0 {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
+		table += "<th class='text-center'>Hotel Name</th>"
+		table += "<th class='text-center'>Room Number</th>"
+		table += "<th class='text-center'>Party Size</th>"
+		table += "<th class='text-center'>Begin Date</th>"
+		table += "<th class='text-center'>End Date</th>"
+		// once you've added all the columns in, close the header
+		table += "</thead><tbody>"
+		// declare all your RETURNED columns here
+		var hotel string
+		var roomNum string
+		var party_size int
+		var begin string
+		var end string
+		for rows.Next() {
+			// assign each of them, in order, to the parameters of rows.Scan.
+			// preface each variable with &
+			rows.Scan(&hotel, &roomNum, &party_size, &begin, &end)
+			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
+			table += "<tr><td>" + hotel + "</td><td>" + roomNum + "</td><td>" + strconv.Itoa(party_size) + "</td><td>" + begin + "</td><td>" + end + "</td></tr>"
+		}
+		// finally, close out the body and table
+		table += "</tbody></table>"
+		c.Data(http.StatusOK, "text/html", []byte(table))
+	})
+
 	router.POST("/Qnewaccount", func(c *gin.Context) {
 		fname := c.PostForm("fname")
 		lname := c.PostForm("lname")
 		email := c.PostForm("email")
 		phone := c.PostForm("phone")
 		password := c.PostForm("password")
-		db.Query("SELECT insert_customer_data($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
+		db.Query("SELECT create_customer($5, $1, $2, $3, $4);", fname, lname, email, phone, password)
 		c.Data(http.StatusOK, "text/html", []byte("New Account Created"))
 	})
 

@@ -8,8 +8,25 @@
 	font-weight: bold;
 }
 
+th {
+    text-align: center;
+}
+
+td {
+	text-align:center;
+}
+
 button, input{
   display: block;
+}
+
+h2 {
+	text-align: center;
+}
+
+#user-container {
+	margin-bottom: 100px;
+	text-align: center;
 }
 
 #newaccount-inputs{
@@ -18,16 +35,9 @@ button, input{
 	position: absolute;
 }
 
-#user-container {
-	top: 75px;
-	left: 100px;
-	position: absolute;
-}
-
-#available-rooms {
-	top: 75px;
-	left: 100px;
-	position: absolute;
+.container {
+	margin: auto;
+	padding-top: 50px; 
 }
 
 #navbar {

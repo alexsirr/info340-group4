@@ -70,8 +70,14 @@ h2 {
 }
 
 #inputbox {
-	float: left;
-	margin-left: 100px;
-	overflow: hidden;
+	width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#inputbox input {
+	margin-bottom: 10px;
 }
 

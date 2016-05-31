@@ -56,8 +56,11 @@ h2 {
 }
 
 #newaccount-inputs {
-	border: 2px solid gray;
+	border: 5px solid gray;
 	border-radius: 10px;
+	width: 50%;
+	margin: auto;
+	text-align: center;
 }
 
 #UserImg {

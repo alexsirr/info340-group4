@@ -168,39 +168,6 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
-	router.GET("/QavailableRooms", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
-		// put your query here
-		rows, err := db.Query("Select hotel_name, room_number, room_type From Hotel Join room on hotel.hotel_id = room.hotel_id join room_type on room.room_type_id = room_type.room_type_id where room.booking_available = 'true';")
-		if err != nil {
-			// careful about returning errors to the user!
-			c.AbortWithError(http.StatusInternalServerError, err)
-		}
-		// foreach loop over rows.Columns, using value
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-		table += "<th class='text-center'>Hotel Name</th>"
-		table += "<th class='text-center'>Room Number</th>"
-		table += "<th class='text-center'>Room Type</th>"
-		// once you've added all the columns in, close the header
-		table += "</thead><tbody>"
-		// declare all your RETURNED columns here
-		var hotel string
-		var roomNum string
-		var roomType string
-		for rows.Next() {
-			// assign each of them, in order, to the parameters of rows.Scan.
-			// preface each variable with &
-			rows.Scan(&hotel, &roomNum, &roomType)
-			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			table += "<tr><td>" + hotel + "</td><td>" + roomNum + "</td><td>" + roomType + "</td></tr>"
-		}
-		// finally, close out the body and table
-		table += "</tbody></table>"
-		c.Data(http.StatusOK, "text/html", []byte(table))
-	})
 
 	router.GET("/QuserBooking", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"

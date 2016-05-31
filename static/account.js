@@ -6,4 +6,8 @@ $(document).ready(function(){
     $.get("/QuserAddr", function(data){
         $("#user-addr").append(data);
     }, "html")
+
+    $.get("/QuserBooking", function(data){
+        $("#user-booking").append(data);
+    }, "html")
 })

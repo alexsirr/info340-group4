@@ -61,7 +61,6 @@ h2 {
 	width: 50%;
 	margin-right: auto;
 	margin-left:auto;
-	text-align: center;
 }
 
 #newaccount-inputs p {
@@ -71,6 +70,7 @@ h2 {
 }
 
 #imputBox {
-	
+	float: left;
+	margin-left: 100px;
 }
 

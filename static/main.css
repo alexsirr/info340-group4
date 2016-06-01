@@ -30,6 +30,7 @@ input {
 
 button#create-account {
 	margin: auto;
+	color: gray;
 }
 
 #user-container {
@@ -95,4 +96,6 @@ button#create-account {
 #inputbox input {
 	margin-bottom: 10px;
 }
+
+
 

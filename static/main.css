@@ -97,5 +97,7 @@ button#create-account {
 	margin-bottom: 10px;
 }
 
-
+#navbar img {
+	float: left;
+}
 

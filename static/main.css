@@ -8,6 +8,10 @@
 	font-weight: bold;
 }
 
+ul {
+	padding-top: 10px;
+}
+
 th {
     text-align: center;
 }
